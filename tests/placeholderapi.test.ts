@@ -31,4 +31,30 @@ test.describe('PlaceholderAPI', () => {
         expect(body.username).toBe('Kumar22');
         expect(body.id).toBeTruthy();
     });
+
+    test('Validating PUT API', async({request})=>{
+        const response = await request.put(
+            'https://jsonplaceholder.typicode.com/users/10',
+            {
+                data:{
+                    id: 11,
+                    name:'kumaravel',
+                    username:'kumaravel22',
+                    email:'kumaravel@gmail.com'
+                }
+            }
+        );
+        expect(response.status()).toBe(200);
+        const body = await response.json();
+        expect(body.name).toBe('kumaravel');
+        expect(body.username).toBe('kumaravel22');
+        expect(body.email).toBe('kumaravel@gmail.com');
+    });
+
+    test('Validating DELETE API', async({request})=>{
+        const response = await request.delete(
+            'https://jsonplaceholder.typicode.com/users/10'
+        );
+        expect(response.status()).toBe(200);
+    });
 });
